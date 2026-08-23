@@ -7,3 +7,7 @@ export type TReduxNamedReducer<
 > = Reducer<S, A> & {
   sliceName: N;
 };
+
+export type TReduxReducerMap<R extends readonly TReduxNamedReducer[]> = {
+  [K in R[number]["sliceName"]]: Extract<R[number], { sliceName: K }>;
+};

@@ -1,24 +1,15 @@
-import { TReduxNamedReducer } from "../types/namedReducer";
-
-export type TReduxNamedReducerMap<
-  R extends readonly TReduxNamedReducer<any, any, string>[],
-> = {
-  [K in R[number]["sliceName"]]: Extract<R[number], { sliceName: K }>;
-};
+import { TReduxNamedReducer, TReduxReducerMap } from "../types/namedReducer";
 
 export const createReduxNamedReducerMap = <
-  R extends readonly TReduxNamedReducer<any, any, string>[],
+  R extends readonly TReduxNamedReducer[],
 >(
   reducers: R,
-): TReduxNamedReducerMap<R> => {
-  const result = {} as TReduxNamedReducerMap<R>;
+): TReduxReducerMap<R> => {
+  const result = {} as TReduxReducerMap<R>;
 
-  reducers.forEach((reducer) => {
-    const key = reducer.sliceName as R[number]["sliceName"];
-
-    (result as Record<R[number]["sliceName"], TReduxNamedReducer>)[key] =
-      reducer;
-  });
+  for (const reducer of reducers) {
+    (result as Record<string, TReduxNamedReducer>)[reducer.sliceName] = reducer;
+  }
 
   return result;
 };
