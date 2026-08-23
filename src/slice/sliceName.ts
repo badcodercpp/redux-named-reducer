@@ -1,17 +1,20 @@
+import { Reducer, combineReducers } from "@reduxjs/toolkit";
+
 import { TReduxNamedReducer } from "../types/namedReducer";
-import { combineReducers } from "@reduxjs/toolkit";
 import { createReduxNamedReducerMap } from "../utils/namedMap";
 
 export const combineNamedSlices = (...reducers: TReduxNamedReducer[]) => {
   return combineReducers(createReduxNamedReducerMap(reducers));
 };
 
-export const createReduxNamedReducer = (
-  target: TReduxNamedReducer,
+export const createReduxNamedReducer = <
+  S = any,
+  A extends { type: string } = { type: string },
+>(
+  target: Reducer<S, A>,
   sliceName: string,
-) => {
-  const reducer: TReduxNamedReducer = Object.assign(target, {
+): TReduxNamedReducer<S, A> => {
+  return Object.assign(target, {
     sliceName,
   });
-  return reducer;
 };
