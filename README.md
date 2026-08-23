@@ -277,6 +277,45 @@ Then give it a name:
 const namedCounterReducer = createReduxNamedReducer(counterReducer, "counter");
 ```
 
+usage with createSlice
+
+```
+export const loginSlice = createSlice({
+  name: 'login',
+  initialState,
+  reducers: {},
+  extraReducers: builder => {
+    // start loading
+    builder
+
+      // start
+      .addCase(initiateLogin.pending, state => {
+        state.pending = true;
+      })
+      // success
+      .addCase(initiateLogin.fulfilled, (state, action) => {
+        state.pending = false;
+        // Add Claims to the state array
+        state.success = action.payload;
+      })
+      // rejected
+      .addCase(initiateLogin.rejected, (state, action) => {
+        state.pending = false;
+        state.error = action.error.message ?? 'Unknown Error';
+      });
+  },
+});
+```
+
+now you can use `createReduxNamedReducer` to create named reducer as following
+
+```
+export const loginSliceReducer = createReduxNamedReducer(
+  loginSlice.reducer,
+  loginSlice.name,
+);
+```
+
 ---
 
 ## 🛠️ API
