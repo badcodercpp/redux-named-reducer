@@ -1,6 +1,6 @@
 {
   "name": "redux-named-reducer",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "redux helper lib to automatically assign name to your reducer fromslice name",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
