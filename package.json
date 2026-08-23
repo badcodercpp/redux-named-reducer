@@ -1,0 +1,43 @@
+{
+  "name": "redux-named-reducer",
+  "version": "1.0.0",
+  "description": "redux helper lib to automatically assign name to your reducer fromslice name",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "npm run test",
+    "build": "tsup",
+    "clear": "rm -rf dist"
+  },
+  "peerDependencies": {
+    "@reduxjs/toolkit": "^2.12.0"
+  },
+  "devDependencies": {
+    "@reduxjs/toolkit": "^2.12.0",
+    "@types/node": "^26.2.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/badcodercpp/redux-named-reducer.git"
+  },
+  "keywords": [
+    "redux",
+    "redux-toolkint",
+    "toolkit",
+    "reducer",
+    "slicename",
+    "reducername"
+  ],
+  "author": "badcoder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/badcodercpp/redux-named-reducer/issues"
+  },
+  "homepage": "https://github.com/badcodercpp/redux-named-reducer#readme"
+}
