@@ -1,12 +1,21 @@
-import { Reducer } from "@reduxjs/toolkit";
 import { TReduxNamedReducer } from "../types/namedReducer";
 
-export const createReduxNamedReducerMap = (reducers: TReduxNamedReducer[]) => {
-  return reducers.reduce(
-    (acc, reducer) => {
-      acc[reducer.sliceName] = reducer;
-      return acc;
-    },
-    {} as Record<string, Reducer>,
-  );
+export type TReduxNamedReducerMap<R extends readonly TReduxNamedReducer[]> = {
+  [K in R[number]["sliceName"]]: Extract<R[number], { sliceName: K }>;
+};
+
+export const createReduxNamedReducerMap = <
+  R extends readonly TReduxNamedReducer[],
+>(
+  reducers: R,
+): TReduxNamedReducerMap<R> => {
+  const result = {} as TReduxNamedReducerMap<R>;
+
+  reducers.forEach((reducer) => {
+    const key = reducer.sliceName as R[number]["sliceName"];
+
+    result[key] = reducer as TReduxNamedReducerMap<R>[typeof key];
+  });
+
+  return result;
 };

@@ -8,12 +8,13 @@ export const combineNamedSlices = (...reducers: TReduxNamedReducer[]) => {
 };
 
 export const createReduxNamedReducer = <
-  S = any,
-  A extends { type: string } = { type: string },
+  S,
+  A extends { type: string },
+  N extends string,
 >(
   target: Reducer<S, A>,
-  sliceName: string,
-): TReduxNamedReducer<S, A> => {
+  sliceName: N,
+): TReduxNamedReducer<S, A, N> => {
   return Object.assign(target, {
     sliceName,
   });
